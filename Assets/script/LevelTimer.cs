@@ -5,6 +5,10 @@ using TMPro; // Aggiunto per poter usare TextMeshPro!
 
 public class LevelTimer : MonoBehaviour
 {
+    [Header("Audio Timer")]
+    public AudioSource audioTimer; // Metteremo qui la clip del Tic-Tac in loop!
+    public AudioClip suonoSconfitta;
+
     [Header("Impostazioni Timer")]
     public float tempoNormale = 30f;
     public float tempoFacile = 45f;
@@ -43,8 +47,11 @@ public class LevelTimer : MonoBehaviour
 
     void Update()
     {
-        if (!timerAttivo || (panelVittoria != null && panelVittoria.activeSelf)) 
+        if (!timerAttivo || (panelVittoria != null && panelVittoria.activeSelf))
+        {
+            if (audioTimer != null && audioTimer.isPlaying) audioTimer.Stop();
             return;
+        }
 
         tempoRimanente -= Time.deltaTime;
 
@@ -62,33 +69,27 @@ public class LevelTimer : MonoBehaviour
         }
 
         // --- 2. GESTISCI L'ALONE ROSSO LAMPEGGIANTE ---
-        if (aloneRosso != null)
+        if (tempoRimanente <= (tempoTotale * 0.25f) && tempoRimanente > 0)
         {
-            // Se il tempo è sceso a 1/4 (il 25%) del totale e non è ancora finito...
-            if (tempoRimanente <= (tempoTotale * 0.25f) && tempoRimanente > 0)
+            if (aloneRosso != null)
             {
-                // Mathf.PingPong fa oscillare il valore tra 0 e 1 in modo fluido
                 float alphaLampeggio = Mathf.PingPong(Time.time * velocitaLampeggio, 1f);
-                
-                // Applica questo valore alla trasparenza (Alpha) dell'alone
-                Color c = aloneRosso.color;
-                c.a = alphaLampeggio;
-                aloneRosso.color = c;
+                Color c = aloneRosso.color; c.a = alphaLampeggio; aloneRosso.color = c;
+            }
+
+            // Fa partire il Tic-Tac se non sta già suonando
+            if (audioTimer != null && !audioTimer.isPlaying)
+            {
+                audioTimer.Play(); // Usa Play() normale, non OneShot, perché è in Loop
             }
         }
 
+        // Se il tempo scade
         if (tempoRimanente <= 0)
         {
             tempoRimanente = 0;
-            
-            // Spegne l'alone quando perdi
-            if (aloneRosso != null)
-            {
-                Color c = aloneRosso.color;
-                c.a = 0f;
-                aloneRosso.color = c;
-            }
-            
+            if (aloneRosso != null) { Color c = aloneRosso.color; c.a = 0f; aloneRosso.color = c; }
+
             Sconfitta();
         }
     }
@@ -96,6 +97,14 @@ public class LevelTimer : MonoBehaviour
     private void Sconfitta()
     {
         timerAttivo = false;
+
+        // Ferma il Tic-Tac e suona la sconfitta!
+        if (audioTimer != null)
+        {
+            audioTimer.Stop();
+            if (suonoSconfitta != null) audioTimer.PlayOneShot(suonoSconfitta);
+        }
+
         if (panelSconfitta != null) panelSconfitta.SetActive(true);
         if (ballController != null) ballController.enabled = false;
     }

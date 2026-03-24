@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioSource audioManagerLivello;
+    public AudioClip suonoVittoria;
     [Header("UI Elements")]
     public GameObject panelVittoria;
     public GameObject panelPausa;
@@ -59,7 +62,10 @@ public void RiavviaLivello()
 public void Vittoria()
     {
         if (giocoFinito) return;
-        
+        if (audioManagerLivello != null && suonoVittoria != null)
+        {
+            audioManagerLivello.PlayOneShot(suonoVittoria);
+        }
         giocoFinito = true;
         panelVittoria.SetActive(true);
         testoMosseFinali.text = "Completato in " + mosse + " mosse!";

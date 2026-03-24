@@ -8,7 +8,10 @@ public class BallController : MonoBehaviour
     [Header("Impostazioni di Movimento")]
     public float speed = 15f; // Velocità di scivolamento
     private bool isMoving = false; // Controlla se la pallina è già in viaggio
-    
+    [Header("Audio Pallina")]
+    public AudioSource audioPallina;
+    public AudioClip suonoStop; // Quando sbatte al muro
+    public AudioClip suonoPad;
     [Header("Riferimenti")]
     public GameManager gameManager; // Trascina qui il GameManager dall'Inspector
 
@@ -99,8 +102,9 @@ public class BallController : MonoBehaviour
         }
 
         // Fissiamo la pallina esattamente sul punto di arrivo per correggere eventuali millimetri di scarto
-        rb.MovePosition(target); 
-        isMoving = false; // Sblocca gli input
+        rb.MovePosition(target);
+        isMoving = false;
+        if (audioPallina != null && suonoStop != null) audioPallina.PlayOneShot(suonoStop);
     }
 
 void OnTriggerEnter(Collider other)
@@ -116,6 +120,7 @@ void OnTriggerEnter(Collider other)
         DirectionalPad pad = other.GetComponent<DirectionalPad>();
         if (pad != null)
         {
+            if (audioPallina != null && suonoPad != null) audioPallina.PlayOneShot(suonoPad);
             // Ferma la pallina all'istante (interrompe la Coroutine)
             if (movementCoroutine != null)
             {

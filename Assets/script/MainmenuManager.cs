@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // Aggiunto per poter usare il componente Toggle!
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Pannelli UI")]
     public GameObject panelPrincipale;
     public GameObject panelLivelli;
-    public GameObject panelOpzioni; // Il nuovo pannello opzioni
+    public GameObject panelOpzioni;
 
     [Header("Opzioni")]
     public Toggle toggleFacile;
     public Toggle toggleNotturna;
+    public Slider sliderVolume;
 
-void Start()
+    void Start()
     {
         panelPrincipale.SetActive(true);
         panelLivelli.SetActive(false);
@@ -34,6 +35,17 @@ void Start()
             bool isNotturna = PlayerPrefs.GetInt("ModalitaNotturna", 1) == 1;
             toggleNotturna.SetIsOnWithoutNotify(isNotturna);
             toggleNotturna.onValueChanged.AddListener(ImpostaModalitaNotturna);
+        }
+        if (sliderVolume != null)
+        {
+            // Legge il volume salvato (o 100% di default)
+            float volumeSalvato = PlayerPrefs.GetFloat("VolumeGlobale", 1f);
+
+            // Imposta la grafica dello slider senza lanciare salvataggi a vuoto
+            sliderVolume.SetValueWithoutNotify(volumeSalvato);
+
+            // Collega lo scorrimento dello slider alla nostra funzione
+            sliderVolume.onValueChanged.AddListener(ImpostaVolume);
         }
     }
 
@@ -112,5 +124,20 @@ void Start()
         PlayerPrefs.SetInt("ModalitaFacile", isAttiva ? 1 : 0);
         PlayerPrefs.Save();
         Debug.Log("Modalità Facile impostata su: " + isAttiva);
+    }
+    public void ImpostaVolume(float valore)
+    {
+        // Passa il valore all'AudioManager
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.CambiaVolumeGlobale(valore);
+        }
+        else
+        {
+            // Se per caso l'AudioManager non fosse pronto, lo forza di brutto
+            AudioListener.volume = valore;
+            PlayerPrefs.SetFloat("VolumeGlobale", valore);
+            PlayerPrefs.Save();
+        }
     }
 }
