@@ -56,7 +56,7 @@ public void RiavviaLivello()
 
     private void AggiornaTestoMosse()
     {
-        testoMosseInGame.text = "Mosse: " + mosse;
+        testoMosseInGame.text = "Moves: " + mosse;
     }
 
 public void Vittoria()
@@ -68,7 +68,7 @@ public void Vittoria()
         }
         giocoFinito = true;
         panelVittoria.SetActive(true);
-        testoMosseFinali.text = "Completato in " + mosse + " mosse!";
+        testoMosseFinali.text = "Solved in " + mosse + " moves!";
 
         int stelleOttenute = 1;
         if (mosse <= mossePerTreStelle) stelleOttenute = 3;
