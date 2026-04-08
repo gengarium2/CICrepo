@@ -11,11 +11,13 @@ public class BottoneLivello : MonoBehaviour
     public Color coloreStellaVuota = Color.gray;
     public Color coloreStellaPiena = Color.yellow;
 
-    private Button bottone; // Riferimento al componente cliccabile
+    [Header("UI Stella Extra")]
+    public GameObject stellaExtraMenu; // NUOVO: La stella gigante arancione sul bottone
+
+    private Button bottone;
 
     void Awake()
     {
-        // Prende in automatico il componente Button attaccato a questo oggetto
         bottone = GetComponent<Button>();
     }
 
@@ -26,32 +28,37 @@ public class BottoneLivello : MonoBehaviour
 
     public void AggiornaStelleEStato()
     {
-        // Recupera il livello massimo sbloccato (se non esiste, di default è 1)
         int livelloMassimoSbloccato = PlayerPrefs.GetInt("LivelliSbloccati", 1);
 
         if (indiceLivello <= livelloMassimoSbloccato)
         {
             // --- LIVELLO SBLOCCATO ---
-            bottone.interactable = true; // Rende il bottone cliccabile
-
+            bottone.interactable = true;
             int stelleSalvate = PlayerPrefs.GetInt("Livello_" + indiceLivello + "_Stelle", 0);
-            
-            for (int i = 0; i < immaginiStelle.Length; i++)
+
+            if (stelleSalvate == 4)
             {
-                immaginiStelle[i].gameObject.SetActive(true); // Mostra le stelle
-                immaginiStelle[i].color = (i < stelleSalvate) ? coloreStellaPiena : coloreStellaVuota;
+                // Mostra la stella arancione e nasconde le altre
+                if (stellaExtraMenu != null) stellaExtraMenu.SetActive(true);
+                for (int i = 0; i < immaginiStelle.Length; i++) immaginiStelle[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                // Mostra le classiche e nasconde quella arancione
+                if (stellaExtraMenu != null) stellaExtraMenu.SetActive(false);
+                for (int i = 0; i < immaginiStelle.Length; i++)
+                {
+                    immaginiStelle[i].gameObject.SetActive(true);
+                    immaginiStelle[i].color = (i < stelleSalvate) ? coloreStellaPiena : coloreStellaVuota;
+                }
             }
         }
         else
         {
             // --- LIVELLO BLOCCATO ---
-            bottone.interactable = false; // Rende il bottone grigio e non cliccabile
-            
-            // Nasconde le stelle se il livello è ancora bloccato
-            for (int i = 0; i < immaginiStelle.Length; i++)
-            {
-                immaginiStelle[i].gameObject.SetActive(false);
-            }
+            bottone.interactable = false;
+            if (stellaExtraMenu != null) stellaExtraMenu.SetActive(false);
+            for (int i = 0; i < immaginiStelle.Length; i++) immaginiStelle[i].gameObject.SetActive(false);
         }
     }
 }

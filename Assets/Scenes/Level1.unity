@@ -297,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 1.76, y: 0.05, z: -3.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -397,12 +397,19 @@ MonoBehaviour:
   testoMosseFinali: {fileID: 1095807997}
   mossePerTreStelle: 5
   mossePerDueStelle: 8
+  mossePerStellaExtra: 4
   stelleVittoria:
   - {fileID: 1191989023}
   - {fileID: 615597599}
   - {fileID: 925388197}
+  testiRequisitiStelle:
+  - {fileID: 6351121651711185222}
+  - {fileID: 6351121651711185221}
+  - {fileID: 6351121651711185220}
   coloreStellaVuota: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   coloreStellaPiena: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  stellaExtraVittoria: {fileID: 6351121651711185219}
+  lineaDiDialogoExtra: perfection achieved!
 --- !u!4 &537615296
 Transform:
   m_ObjectHideFlags: 0
@@ -2222,6 +2229,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+--- !u!1 &6351121651711185219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3268462503200250578, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 6351121651711185218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6351121651711185220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 70187214072598953, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 6351121651711185218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6351121651711185221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5044905532582921188, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 6351121651711185218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6351121651711185222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2011410147499203221, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 6351121651711185218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

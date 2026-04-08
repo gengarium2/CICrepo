@@ -16,11 +16,15 @@ public class GameManager : MonoBehaviour
     [Header("Sistema a Stelle")]
     public int mossePerTreStelle = 5;
     public int mossePerDueStelle = 10;
+    public int mossePerStellaExtra = 8;
     [Header("UI Stelle Vittoria")]
-    public Image[] stelleVittoria; // Qui trascinerai le 3 immagini dal PanelVittoria
+    public Image[] stelleVittoria;
+    public GameObject[] testiRequisitiStelle;
     public Color coloreStellaVuota = Color.gray;
     public Color coloreStellaPiena = Color.yellow;
-
+    [Header("UI Stella Extra")]
+    public GameObject stellaExtraVittoria;
+    public string lineaDiDialogoExtra = "perfection achieved!";
     private int mosse = 0;
     private bool inPausa = false;
     private bool giocoFinito = false;
@@ -71,14 +75,34 @@ public void Vittoria()
         testoMosseFinali.text = "Solved in " + mosse + " moves!";
 
         int stelleOttenute = 1;
-        if (mosse <= mossePerTreStelle) stelleOttenute = 3;
+        if (mosse <= mossePerStellaExtra) stelleOttenute = 4;
+        else if (mosse <= mossePerTreStelle) stelleOttenute = 3;
         else if (mosse <= mossePerDueStelle) stelleOttenute = 2;
 
-        for (int i = 0; i < stelleVittoria.Length; i++)
+        if (stelleOttenute == 4)
         {
-            stelleVittoria[i].color = (i < stelleOttenute) ? coloreStellaPiena : coloreStellaVuota;
+            for (int i = 0; i < stelleVittoria.Length; i++) stelleVittoria[i].gameObject.SetActive(false);
+            for (int i = 0; i < testiRequisitiStelle.Length; i++)
+            {
+                if (testiRequisitiStelle[i] != null) testiRequisitiStelle[i].SetActive(false);
+            }
+
+            if (stellaExtraVittoria != null) stellaExtraVittoria.SetActive(true);
+        }
+        else
+        {
+            // Accende le classiche e spegne l'arancione
+            if (stellaExtraVittoria != null) stellaExtraVittoria.SetActive(false);
+            for (int i = 0; i < stelleVittoria.Length; i++)
+            {
+                stelleVittoria[i].gameObject.SetActive(true);
+                stelleVittoria[i].color = (i < stelleOttenute) ? coloreStellaPiena : coloreStellaVuota;
+            }
+
+            testoMosseFinali.text = "Solved in " + mosse + " moves!";
         }
 
+        // --- SALVATAGGIO E SBLOCCO ---
         int livelloCorrente = SceneManager.GetActiveScene().buildIndex;
         int recordStelle = PlayerPrefs.GetInt("Livello_" + livelloCorrente + "_Stelle", 0);
 
@@ -87,19 +111,14 @@ public void Vittoria()
             PlayerPrefs.SetInt("Livello_" + livelloCorrente + "_Stelle", stelleOttenute);
         }
 
-        // --- NUOVO PEZZO: SBLOCCO DEL LIVELLO SUCCESSIVO ---
         int prossimoLivello = livelloCorrente + 1;
         int livelloMassimoSbloccato = PlayerPrefs.GetInt("LivelliSbloccati", 1);
-
-        // Se il prossimo livello è maggiore di quello che avevamo già sbloccato in passato, aggiorniamo il record!
         if (prossimoLivello > livelloMassimoSbloccato)
         {
             PlayerPrefs.SetInt("LivelliSbloccati", prossimoLivello);
-            Debug.Log("Sbloccato il livello: " + prossimoLivello);
         }
-        // ----------------------------------------------------
 
-        PlayerPrefs.Save(); // Salva sia le stelle che lo sblocco in un colpo solo
+        PlayerPrefs.Save();
     }
 
     public void TogglePausa()

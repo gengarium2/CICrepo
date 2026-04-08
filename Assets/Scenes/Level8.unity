@@ -4624,12 +4624,19 @@ MonoBehaviour:
   testoMosseFinali: {fileID: 1860853208}
   mossePerTreStelle: 8
   mossePerDueStelle: 16
+  mossePerStellaExtra: 7
   stelleVittoria:
   - {fileID: 1494834053}
   - {fileID: 1494834052}
   - {fileID: 1494834051}
+  testiRequisitiStelle:
+  - {fileID: 1798113643}
+  - {fileID: 1798113642}
+  - {fileID: 1798113641}
   coloreStellaVuota: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   coloreStellaPiena: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  stellaExtraVittoria: {fileID: 904653176}
+  lineaDiDialogoExtra: perfection achieved!
 --- !u!4 &537615296
 Transform:
   m_ObjectHideFlags: 0
@@ -6607,6 +6614,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -709321464025164227, guid: e983a18cc7ba1b94f933b9d642935988, type: 3}
+--- !u!1 &904653176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3268462503200250578, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1860853205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &924700649
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11442,6 +11454,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 928141931}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1798113641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 70187214072598953, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1860853205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1798113642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5044905532582921188, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1860853205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1798113643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2011410147499203221, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1860853205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1804741498
 PrefabInstance:
   m_ObjectHideFlags: 0

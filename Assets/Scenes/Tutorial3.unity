@@ -419,7 +419,7 @@ Transform:
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 2.36, y: -0.96, z: -4.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -492,12 +492,19 @@ MonoBehaviour:
   testoMosseFinali: {fileID: 1412132180}
   mossePerTreStelle: 4
   mossePerDueStelle: 6
+  mossePerStellaExtra: 3
   stelleVittoria:
   - {fileID: 1412132177}
   - {fileID: 1412132179}
   - {fileID: 1412132178}
+  testiRequisitiStelle:
+  - {fileID: 1502450817}
+  - {fileID: 1502450816}
+  - {fileID: 1502450815}
   coloreStellaVuota: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   coloreStellaPiena: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  stellaExtraVittoria: {fileID: 1584834621}
+  lineaDiDialogoExtra: perfection achieved!
 --- !u!4 &537615296
 Transform:
   m_ObjectHideFlags: 0
@@ -1178,6 +1185,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MuoviGiu
       objectReference: {fileID: 0}
+    - target: {fileID: 7829779883980985282, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8047607918571172669, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1392,6 +1403,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431706500}
   m_Mesh: {fileID: -1331679764260754669, guid: 71d673228e7fc03478dcbe9a0bd443ba, type: 3}
+--- !u!1 &1502450815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 70187214072598953, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1412132174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1502450816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5044905532582921188, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1412132174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1502450817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2011410147499203221, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1412132174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1584834621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3268462503200250578, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
+  m_PrefabInstance: {fileID: 1412132174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1619377799
 GameObject:
   m_ObjectHideFlags: 0
