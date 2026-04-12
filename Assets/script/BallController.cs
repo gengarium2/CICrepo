@@ -118,7 +118,7 @@ public class BallController : MonoBehaviour
         }
 
         DirectionalPad pad = other.GetComponent<DirectionalPad>();
-        if (pad != null && isMoving) // Solo se ci stiamo passando sopra
+        if (pad != null) // Solo se ci stiamo passando sopra
         {
             if (audioPallina != null && suonoPad != null) audioPallina.PlayOneShot(suonoPad);
             if (movementCoroutine != null) StopCoroutine(movementCoroutine);
