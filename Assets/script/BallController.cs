@@ -48,22 +48,82 @@ public class BallController : MonoBehaviour
     {
         if (isMoving) return;
         RaycastHit hit;
+
         if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
         {
-            if (hit.distance <= ballRadius + 0.05f)
-            {
-                return;
-            }
+            if (hit.distance <= ballRadius + 0.05f) return;
 
             Vector3 targetPosition = transform.position + direction * (hit.distance - ballRadius);
-            if (contaMossa && gameManager != null)
-            {
-                gameManager.AggiungiMossa();
-            }
 
+            if (contaMossa && gameManager != null) gameManager.AggiungiMossa();
+
+            // --- RILEVAMENTO COSA ABBIAMO COLPITO DI PUNTA ---
             Portal portaleColpito = hit.collider.GetComponent<Portal>();
+            DirectionalPad padColpito = hit.collider.GetComponent<DirectionalPad>();
+            bool colpitaFine = hit.collider.CompareTag("Finish");
 
-            movementCoroutine = StartCoroutine(SlideToPosition(targetPosition, portaleColpito));
+            // Passiamo tutto alla Coroutine
+            movementCoroutine = StartCoroutine(SlideToPosition(targetPosition, portaleColpito, padColpito, colpitaFine));
+        }
+    }
+
+    IEnumerator SlideToPosition(Vector3 target, Portal portaleColpito, DirectionalPad padColpito, bool colpitaFine)
+    {
+        isMoving = true;
+
+        while (Vector3.Distance(transform.position, target) > 0.01f)
+        {
+            rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime));
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb.MovePosition(target);
+        isMoving = false;
+
+        // --- LOGICA DI RISOLUZIONE (Cosa succede quando mi fermo?) ---
+
+        // 1. È la fine del livello?
+        if (colpitaFine && gameManager != null)
+        {
+            gameManager.Vittoria();
+        }
+        // 2. È un portale?
+        else if (portaleColpito != null && portaleColpito.linkedPortal != null)
+        {
+            if (audioPallina != null && suonoPortale != null) audioPallina.PlayOneShot(suonoPortale);
+            Portal uscita = portaleColpito.linkedPortal;
+            Vector3 dirUscita = uscita.OttieniDirezioneUscita();
+            Vector3 nuovaPos = uscita.transform.position + (dirUscita * ballRadius);
+            transform.position = nuovaPos;
+            rb.MovePosition(nuovaPos);
+            TryMove(dirUscita, false);
+        }
+        // 3. È un pad direzionale sul muro?
+        else if (padColpito != null)
+        {
+            if (audioPallina != null && suonoPad != null) audioPallina.PlayOneShot(suonoPad);
+            TryMove(padColpito.OttieniVettoreDirezione());
+        }
+        // 4. È un muro normale?
+        else
+        {
+            if (audioPallina != null && suonoStop != null) audioPallina.PlayOneShot(suonoStop);
+        }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish") && gameManager != null)
+        {
+            gameManager.Vittoria();
+        }
+
+        DirectionalPad pad = other.GetComponent<DirectionalPad>();
+        if (pad != null && isMoving) // Solo se ci stiamo passando sopra
+        {
+            if (audioPallina != null && suonoPad != null) audioPallina.PlayOneShot(suonoPad);
+            if (movementCoroutine != null) StopCoroutine(movementCoroutine);
+            isMoving = false;
+            TryMove(pad.OttieniVettoreDirezione());
         }
     }
 
@@ -98,30 +158,7 @@ public class BallController : MonoBehaviour
             if (audioPallina != null && suonoStop != null) audioPallina.PlayOneShot(suonoStop);
         }
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        Dp = GetComponent<DirectionalPad>();
-        if (other.CompareTag("Finish") && gameManager != null)
-        {
-            gameManager.Vittoria();
-        }
-        DirectionalPad pad = other.GetComponent<DirectionalPad>();
-        if (pad != null)
-        {
-            if (audioPallina != null && suonoPad != null) audioPallina.PlayOneShot(suonoPad);
-
-            if (movementCoroutine != null)
-            {
-                StopCoroutine(movementCoroutine);
-            }
-
-            isMoving = false;
-            // Se in futuro vorrai che anche il pad non conti la mossa, cambia questa riga in: TryMove(pad.OttieniVettoreDirezione(), false);
-            TryMove(pad.OttieniVettoreDirezione());
-        }
-    }
-
+    
     public void MuoviAvanti() { TryMove(Vector3.forward); }
     public void MuoviIndietro() { TryMove(Vector3.back); }
     public void MuoviDestra() { TryMove(Vector3.right); }

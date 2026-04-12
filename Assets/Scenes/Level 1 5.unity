@@ -5147,9 +5147,9 @@ MonoBehaviour:
   panelPausa: {fileID: 1860853207}
   testoMosseInGame: {fileID: 1860853209}
   testoMosseFinali: {fileID: 1860853208}
-  mossePerTreStelle: 12
+  mossePerTreStelle: 16
   mossePerDueStelle: 20
-  mossePerStellaExtra: 11
+  mossePerStellaExtra: 15
   stelleVittoria:
   - {fileID: 1494834053}
   - {fileID: 1494834052}
@@ -12178,7 +12178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5228124375472055608, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_text
-      value: 12
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6681085471049605763, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_Pivot.x

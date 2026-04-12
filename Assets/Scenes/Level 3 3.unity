@@ -10942,7 +10942,7 @@ PrefabInstance:
       objectReference: {fileID: 537615295}
     - target: {fileID: 1002465253899854170, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TornaAlMenuPrincipale
+      value: CaricaProssimoLivello
       objectReference: {fileID: 0}
     - target: {fileID: 1479408256380133293, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

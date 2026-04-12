@@ -4128,9 +4128,9 @@ MonoBehaviour:
   panelPausa: {fileID: 1860853207}
   testoMosseInGame: {fileID: 1860853209}
   testoMosseFinali: {fileID: 1860853208}
-  mossePerTreStelle: 11
-  mossePerDueStelle: 18
-  mossePerStellaExtra: 10
+  mossePerTreStelle: 8
+  mossePerDueStelle: 12
+  mossePerStellaExtra: 7
   stelleVittoria:
   - {fileID: 1494834053}
   - {fileID: 1494834052}
@@ -14595,11 +14595,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 54344050777707735, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_text
-      value: 19+
+      value: 13+
       objectReference: {fileID: 0}
     - target: {fileID: 469351868025892117, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_text
-      value: 18
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1002465253899854170, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -14655,7 +14655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5228124375472055608, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_text
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6681085471049605763, guid: 6bbeafa5e794123489ebae1f852d0b9a, type: 3}
       propertyPath: m_Pivot.x
@@ -14961,7 +14961,7 @@ Transform:
   m_GameObject: {fileID: 1863595122}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.919, y: -1.161, z: -8.42}
+  m_LocalPosition: {x: 0.919, y: -1.105, z: -8.562}
   m_LocalScale: {x: 0.3614456, y: 0.0771084, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []

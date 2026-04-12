@@ -13761,7 +13761,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 537615295}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: CaricaProssimoLivello
+        m_MethodName: TornaAlMenuPrincipale
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20065,8 +20065,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9778967, y: 1.6858358, z: 1}
-  m_Center: {x: -0.011051735, y: -0.3429179, z: -3.3378106e-16}
+  m_Size: {x: 0.9778967, y: 1.0242233, z: 1}
+  m_Center: {x: -0.011051735, y: -0.012111546, z: -1.4198221e-17}
 --- !u!23 &1863595124
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20133,7 +20133,7 @@ Transform:
   m_GameObject: {fileID: 1863595122}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.606, y: 0.735, z: 1.4}
+  m_LocalPosition: {x: 0.606, y: 0.735, z: 1.466}
   m_LocalScale: {x: 1.5, y: 0.19000001, z: 1.5000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
